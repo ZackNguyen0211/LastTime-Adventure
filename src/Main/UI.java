@@ -30,14 +30,31 @@ public class UI {
         g2.setFont(arial_40);
         g2.setColor(Color.white);
 
+        //title state
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
+        //play state
         if(gp.gameState == gp.playState){
 
         }
+        // pause state
         if(gp.gameState == gp.pauseState){
-
+            drawPauseScreen();
         }
     }
+    public void drawTitleScreen(){
+        //tilte nam
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 70F));
+        String text = "Last Time Adventure";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize*3;
+
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+    }
     public void drawPauseScreen(){
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
         String text = "PAUSED";
         int x = getXforCenteredText(text);
        
