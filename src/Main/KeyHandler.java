@@ -58,21 +58,36 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
         if(code == KeyEvent.VK_P){
-            gp.gameState = gp.pauseState;
+            if(gp.gameState == gp.playState){
+                gp.gameState = gp.pauseState;
             }
+                else if(code == KeyEvent.VK_P){
+                    if( gp.gameState == gp.pauseState){
+                        gp.gameState =gp.playState;
+                        
+                    }
+                }
+            }
+
+    //     if(code == KeyEvent.VK_P){
+    //         gp.gameState = gp.pauseState;
+    //     }
+    //      //Pause State
+    //     else if(gp.gameState == gp.pauseState){
+    //         if( code == KeyEvent.VK_P){
+    //             gp.gameState =gp.playState;
+            
+    //     }
+    // }
+
+            
         if(code == KeyEvent.VK_ENTER){
             enterPressed = true;           
         }
     
 
-    //Pause State
-    else if(gp.gameState == gp.pauseState){
-        if( code == KeyEvent.VK_P){
-            gp.gameState =gp.pauseState;
-            
-        }
-    }
-    
+   
+     
 }
 
     @Override
