@@ -2,6 +2,12 @@ package Main;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
+
+import object.OBJ_Heart;
+import object.SuperObject;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -9,7 +15,8 @@ import java.awt.Font;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font arial_40, arial_80B;
+    Font arial_40, arial_80B, maruMonica, purisaB;
+    BufferedImage heart_full, heart_half, heart_blank;
    
     public boolean messageOn = false;
     public String message ="";
@@ -22,6 +29,12 @@ public class UI {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
+
+        // Create hub object
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
     }
     public void showMessage(String text){
         message = text ;
@@ -40,11 +53,24 @@ public class UI {
         }
         //play state
         if(gp.gameState == gp.playState){
-
+            drawPlayerLife();
         }
         // pause state
         if(gp.gameState == gp.pauseState){
+            drawPlayerLife()
             drawPauseScreen();
+            
+        }
+    }
+    public void drawPlayerLife(){
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i = 0;
+
+        while (i< gp.player.maxLife/2) {
+            g2.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gp.tileSize;
         }
     }
     public void drawTitleScreen(){

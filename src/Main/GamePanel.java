@@ -2,6 +2,7 @@ package Main;
 
 import Entity.Player;
 import Tiles.TileManager;
+import object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,8 +30,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler(this);
     Thread gameThread;
     public CollisionCheck cChecker = new CollisionCheck(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
-
+    public SuperObject obj[] = new SuperObject[10];
     public UI ui = new UI(this);
 
     //Game State
@@ -49,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame(){
+        aSetter.setObject();
         gameState = titleState;
     }
 
@@ -94,9 +97,14 @@ public class GamePanel extends JPanel implements Runnable {
         }
         // others
         else{
-             // tile
+        // tile
         tileM.draw(g2);
-    
+        // object
+        for(int i = 0; i< obj.length; i++){
+            if(obj[i] !=null){
+                obj[i].draw(g2, this);
+            }
+        }
         // player
         player.draw(g2);
         // UI
