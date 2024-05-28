@@ -57,7 +57,7 @@ public class UI {
         }
         // pause state
         if(gp.gameState == gp.pauseState){
-            drawPlayerLife()
+            drawPlayerLife();
             drawPauseScreen();
             
         }
