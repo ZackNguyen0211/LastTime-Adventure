@@ -2,6 +2,7 @@ package Main;
 
 import Entity.Player;
 import Tiles.TileManager;
+import object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,11 +25,22 @@ public class GamePanel extends JPanel implements Runnable {
 
     int FPS = 60;
 
+    // system
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Thread gameThread;
     public CollisionCheck cChecker = new CollisionCheck(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+    public SuperObject obj[] = new SuperObject[10];
+    public UI ui = new UI(this);
+
+    //Game State
+    public int gameState;
+    public final int titleState = 0;
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int optionsState = 5;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -36,6 +48,12 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+    }
+
+    public void setupGame(){
+        aSetter.setObject();
+        gameState = titleState;
     }
 
     public void startGameThread(){
@@ -64,13 +82,37 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
     public void update(){
-        player.update();
+        if(gameState == playState){
+            player.update();
+        }
+        if(gameState == pauseState){
+            // nothing
+        }
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        // title screen
+        if(gameState == titleState){
+            ui.draw(g2);
+        }
+        // others
+        else{
+        // tile
         tileM.draw(g2);
+        // object
+        for(int i = 0; i< obj.length; i++){
+            if(obj[i] !=null){
+                obj[i].draw(g2, this);
+            }
+        }
+        // player
         player.draw(g2);
+        // UI
+        ui.draw(g2);
         g2.dispose();
+
+        }
+       
     }
 }

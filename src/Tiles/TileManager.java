@@ -1,9 +1,11 @@
 package Tiles;
 
 import Main.GamePanel;
+import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +27,13 @@ public class TileManager {
         try{
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/tiles/grass.png")));
-
+            // setup(0, "grass", false);
+            // setup(1, "wall", false);
+            // setup(2, "water", false);
+            // setup(3, "tree", false);
+            // setup(4, "dirt", false);
+            // setup(5, "sand", false);
+      
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/tiles/wall.png")));
             tile[1].collision = true;
@@ -45,6 +53,20 @@ public class TileManager {
             tile[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/tiles/sand.png")));
 
         }catch (IOException | NullPointerException e){
+            e.printStackTrace();
+         }
+     }
+
+    public void setup(int index, String imagePath, boolean collision ){
+
+        UtilityTool uTool = new UtilityTool();
+        try{
+            tile[index] = new Tile();
+            tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/tiles/"+ imagePath+ ".png")));
+            tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+            tile[index].collision =collision;
+
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
