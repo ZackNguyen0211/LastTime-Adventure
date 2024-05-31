@@ -47,6 +47,16 @@ public class Player extends Entity{
             e.printStackTrace();
         }
     }
+    public void getPlayerAttackImage(){
+        attackUp1 = setup("");
+        attackUp2 = setup("");
+        attackDown1 = setup("");
+        attackDown2 = setup("");
+        attackLeft1 = setup("");
+        attackLeft2 = setup("");
+        attackRight1 = setup("");
+        attackRight2 = setup("");
+    }
     public void update(){
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed){
             if(keyH.upPressed){
