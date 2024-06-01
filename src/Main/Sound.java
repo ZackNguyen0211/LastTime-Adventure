@@ -11,7 +11,7 @@ public class Sound {
     URL soundURL[] = new URL[30];
 
     public Sound(){
-        soundURL[0] = getClass().getResource("");
+        soundURL[0] = getClass().getResource("/Sound/LastTime.wav");
         soundURL[1] = getClass().getResource("");
         soundURL[2] = getClass().getResource("");
         soundURL[3] = getClass().getResource("");
@@ -24,7 +24,6 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
         }catch (Exception e) {
-
         }
     }
 
