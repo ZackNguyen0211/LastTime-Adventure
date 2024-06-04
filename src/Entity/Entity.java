@@ -13,13 +13,13 @@ public class Entity {
     public int speed;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
-    public String direction;
+    public String direction = "down";
     public int spriteCounter = 0;
     public int spriteNum = 1;
     public Rectangle solidArea;
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public boolean collisionOn = false;
-    boolean attacking = false;
+    boolean isAttacking = false;
 
     //Character status
     public int maxLife;
@@ -35,5 +35,16 @@ public class Entity {
             e.printStackTrace();
         }
         return image;
+    }
+    public void checkAndChangeSpriteAnimationImage() {
+        spriteCounter++;
+        if(spriteCounter > 12){
+            if(spriteNum == 1){
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
     }
 }
