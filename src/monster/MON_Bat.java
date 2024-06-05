@@ -24,6 +24,7 @@ public class MON_Bat extends Entity {
         solidArea.height = 30;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        
         getBatImage();
     }
     public void getBatImage(){

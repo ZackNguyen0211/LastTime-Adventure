@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public CollisionCheck cChecker = new CollisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
+
     //Entity and Object
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[10];
@@ -104,7 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //monster
             for(int i = 0; i< monster.length; i++){
-                if(monster[i] !=null){
+                if(monster[i] != null){
                     monster[i].update();
                 }
             }
@@ -139,23 +140,23 @@ public class GamePanel extends JPanel implements Runnable {
             //monster
             for(int i = 0; i< monster.length; i++){
                 if(monster[i] !=null){
-                    entityList.add(monster[i]);
+                    monster[i].draw(g2);
                 }
             }
-            Collections.sort(entityList, new Comparator<Entity>() {
-                @Override
-                public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.worldY, e2.worldY);
-                    return result;
-                }
+            // Collections.sort(entityList, new Comparator<Entity>() {
+            //     @Override
+            //     public int compare(Entity e1, Entity e2) {
+            //         int result = Integer.compare(e1.worldY, e2.worldY);
+            //         return result;
+            //     }
                 
-            });
-            for(int i = 0; i< entityList.size(); i++){
-                entityList.get(i).draw(g2);
-            }
-            for(int i = 0; i< entityList.size(); i++){
-                entityList.remove(i);
-            }
+            // });
+            // for(int i = 0; i< entityList.size(); i++){
+            //     entityList.get(i).draw(g2);
+            // }
+            // for(int i = 0; i< entityList.size(); i++){
+            //     entityList.remove(i);
+            // }
             // player
             player.draw(g2);
             // UI

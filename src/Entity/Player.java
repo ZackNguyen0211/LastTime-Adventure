@@ -62,8 +62,11 @@ public class Player extends Entity{
             gp.cChecker.checkTile(this);
 
             //check bat collision
-            int batIndex = gp.cChecker.checkEntity(this, gp.monster);
+            int batIndex = gp.cChecker.checkEntity(this, gp.bat);
             interactBat(batIndex);
+            //check monster collision
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            interactMonster(monsterIndex);
 
             // If collision is false, player can move
             if(!collisionOn){
@@ -100,6 +103,15 @@ public class Player extends Entity{
             // gp.monster[batIndex].life --;
             // if(gp.monster[batIndex].life <= 0){
             //     gp.monster[batIndex] = null;
+            // }
+        }
+    }
+    public void interactMonster(int monsterIndex){
+        if(monsterIndex != 999){
+            System.out.println("Player hit Monster");
+            // gp.monster[monsterIndex].life --;
+            // if(gp.monster[monsterIndex].life <= 0){
+            //     gp.monster[monsterIndex] = null;
             // }
         }
     }
