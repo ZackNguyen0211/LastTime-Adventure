@@ -10,12 +10,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity{
-    GamePanel gp;
     KeyHandler keyH;
     public final int screenX ;
     public final int screenY ;
     public Player(GamePanel gp, KeyHandler keyH){
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
@@ -62,6 +61,10 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //check bat collision
+            int batIndex = gp.cChecker.checkEntity(this, gp.monster);
+            interactBat(batIndex);
+
             // If collision is false, player can move
             if(!collisionOn){
                 switch (direction){
@@ -89,6 +92,15 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
+        }
+    }
+    public void interactBat(int batIndex){
+        if(batIndex != 999){
+            System.out.println("Player hit Bat");
+            // gp.monster[batIndex].life --;
+            // if(gp.monster[batIndex].life <= 0){
+            //     gp.monster[batIndex] = null;
+            // }
         }
     }
     public void draw(Graphics2D g2){
