@@ -2,7 +2,7 @@ package Main;
 
 import monster.MON_Bat;
 import monster.MON_GreenSlime;
-import object.OBJ_Heart;
+import Object.OBJ_Heart;
 
 public class AssetSetter {
     GamePanel gp;

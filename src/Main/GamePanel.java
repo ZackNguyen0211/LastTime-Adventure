@@ -3,14 +3,11 @@ package Main;
 import Entity.Entity;
 import Entity.Player;
 import Tiles.TileManager;
-import object.SuperObject;
+import Object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
     //Screen Settings
@@ -39,9 +36,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     //Entity and Object
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];
-    public Entity bat[] = new Entity[20];
-    public Entity monster[] = new Entity[20];
+    public SuperObject[] obj = new SuperObject[10];
+    public Entity[] bat = new Entity[20];
+    public Entity[] monster = new Entity[20];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     public UI ui = new UI(this);
