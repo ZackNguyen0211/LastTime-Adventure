@@ -12,10 +12,10 @@ public class Sound {
 
     public Sound(){
         soundURL[0] = getClass().getResource("/Sound/LastTime.wav");
-        soundURL[1] = getClass().getResource("");
-        soundURL[2] = getClass().getResource("");
-        soundURL[3] = getClass().getResource("");
-        soundURL[4] = getClass().getResource("");
+        soundURL[1] = getClass().getResource("/Sound/hitmonster.wav");
+        soundURL[2] = getClass().getResource("/Sound/receivedamage.wav");
+        soundURL[3] = getClass().getResource("/Sound/FinalBattle.wav");
+        soundURL[4] = getClass().getResource("/Sound/gameover.wav");
     }
 
     public void setFile(int i){
