@@ -5,6 +5,8 @@ import Main.KeyHandler;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity{
     KeyHandler keyH;
@@ -36,24 +38,32 @@ public class Player extends Entity{
         life = maxLife;
     }
     public void getPlayerImage(){
-            up1 = setup("/Picture/player/up_1", gp.tileSize, gp.tileSize);
-            up2 = setup("/Picture/player/up_2", gp.tileSize, gp.tileSize);
-            down1 = setup("/Picture/player/down_1", gp.tileSize, gp.tileSize);
-            down2 = setup("/Picture/player/down_2", gp.tileSize, gp.tileSize);
-            left1 = setup("/Picture/player/left_1", gp.tileSize, gp.tileSize);
-            left2 = setup("/Picture/player/left_2", gp.tileSize, gp.tileSize);
-            right1 = setup("/Picture/player/right_1", gp.tileSize, gp.tileSize);
-            right2 = setup("/Picture/player/right_2", gp.tileSize, gp.tileSize);
+        try {
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/up_1")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/up_2")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/down_1")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/down_2")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/left_1")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/left_2")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/right_1")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/right_2")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void getPlayerAttackImage() {
-            attackUp1 = setup("/Picture/player/attackUp_1", gp.tileSize, gp.tileSize*2);
-            attackUp2 = setup("/Picture/player/attackUp_2", gp.tileSize, gp.tileSize*2);
-            attackDown1 = setup("/Picture/player/attackDown_1", gp.tileSize, gp.tileSize*2);
-            attackDown2 = setup("/Picture/player/attackDown_2", gp.tileSize, gp.tileSize*2);
-            attackLeft1 = setup("/Picture/player/attackLeft_1", gp.tileSize*2, gp.tileSize);
-            attackLeft2 = setup("/Picture/player/attackLeft_2", gp.tileSize*2, gp.tileSize);
-            attackRight1 = setup("/Picture/player/attackRight_1", gp.tileSize*2, gp.tileSize);
-            attackRight2 = setup("/Picture/player/attackRight_2", gp.tileSize*2, gp.tileSize);
+        try {
+            attackUp1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackUp_1")));
+            attackUp2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackUp_2")));
+            attackDown1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackDown_1")));
+            attackDown2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackDown_2")));
+            attackLeft1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackLeft_1")));
+            attackLeft2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackLeft_2")));
+            attackRight1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackRight_1")));
+            attackRight2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackRight_2")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void update() {
         if(isAttacking) {
