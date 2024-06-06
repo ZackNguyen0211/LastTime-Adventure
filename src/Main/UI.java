@@ -3,10 +3,9 @@ package Main;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
-import object.OBJ_Heart;
-import object.SuperObject;
+import Object.OBJ_Heart;
+import Object.SuperObject;
 
 import java.awt.Color;
 import java.awt.Font;
