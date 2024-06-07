@@ -26,14 +26,14 @@ public class MON_GreenSlime extends Entity {
     }
 
     public void getGreenSlimeImage(){
-        up1 = setup("/Picture/green_slime/green_slime_down_1.png", gp.tileSize, gp.tileSize);
-        up2 = setup("/Picture/green_slime/green_slime_down_2.png", gp.tileSize, gp.tileSize);
-        down1 = setup ("/Picture/green_slime/green_slime_down_1.png", gp.tileSize, gp.tileSize);;
-        down2 = setup("/Picture/green_slime/green_slime_down_2.png", gp.tileSize, gp.tileSize);
-        left1 = setup("/Picture/green_slime/green_slime_down_1.png", gp.tileSize, gp.tileSize);
-        left2 = setup("/Picture/green_slime/green_slime_down_2.png", gp.tileSize, gp.tileSize);
-        right1 = setup("/Picture/green_slime/green_slime_down_1.png", gp.tileSize, gp.tileSize);
-        right2 = setup("/Picture/green_slime/green_slime_down_2.png", gp.tileSize, gp.tileSize);
+        up1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup ("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);;
+        down2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
     }
     @Override
     public void setAction(){

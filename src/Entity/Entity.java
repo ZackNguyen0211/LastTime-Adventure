@@ -134,13 +134,10 @@ public class Entity {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try {
-            System.out.println(STR."Attempting to load image: \{imagePath}");  // Debug print statement
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/src/\{imagePath}"), STR."Image resource not found: \{imagePath}"));
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
             image = uTool.scaleImage(image, width, height);
         } catch (IOException e) {
-            System.err.println(STR."Error reading image at path: \{imagePath}");
             e.printStackTrace();
-            throw new RuntimeException(STR."Error reading image: \{imagePath}", e);
         }
         return image;
     }

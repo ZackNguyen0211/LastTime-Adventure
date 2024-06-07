@@ -1,6 +1,5 @@
 package Main;
 
-import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -12,10 +11,10 @@ public class Sound {
 
     public Sound(){
         soundURL[0] = getClass().getResource("/Sound/LastTime.wav");
-        soundURL[1] = getClass().getResource("/Sound/hitmonster.wav");
-        soundURL[2] = getClass().getResource("/Sound/receivedamage.wav");
+        soundURL[1] = getClass().getResource("/Sound/HitMonster.wav");
+        soundURL[2] = getClass().getResource("/Sound/ReceiveDamage.wav");
         soundURL[3] = getClass().getResource("/Sound/FinalBattle.wav");
-        soundURL[4] = getClass().getResource("/Sound/gameover.wav");
+        soundURL[4] = getClass().getResource("/Sound/GameOver.wav");
     }
 
     public void setFile(int i){

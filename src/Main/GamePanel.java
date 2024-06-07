@@ -21,11 +21,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; //768 pixels
     public final int screenHeight = tileSize * maxScreenRow; //576 pixels
 
-    //World settings
-    public final int maxWorldCol = 32;
-    public final int maxWorldRow = 24;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
+    //World settings 50x30
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 30;
 
     int FPS = 60;
 
@@ -62,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame(){
+        playMusic(0);
         aSetter.setObject();
         aSetter.setMonster();
         aSetter.setBat();
@@ -144,20 +143,6 @@ public class GamePanel extends JPanel implements Runnable {
                     monster[i].draw(g2);
                 }
             }
-            // Collections.sort(entityList, new Comparator<Entity>() {
-            //     @Override
-            //     public int compare(Entity e1, Entity e2) {
-            //         int result = Integer.compare(e1.worldY, e2.worldY);
-            //         return result;
-            //     }
-                
-            // });
-            // for(int i = 0; i< entityList.size(); i++){
-            //     entityList.get(i).draw(g2);
-            // }
-            // for(int i = 0; i< entityList.size(); i++){
-            //     entityList.remove(i);
-            // }
             // player
             player.draw(g2);
             // UI
@@ -167,4 +152,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
        
     }
+    public void playMusic(int i){
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+    public void stopMusic(){
+        music.stop();
+    }
+    public void playSE(int i){
+        se.setFile(i);
+        se.play();
+    }
+
 }
