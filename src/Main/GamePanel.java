@@ -110,7 +110,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         if(gameState == pauseState){
-
         }
     }
     public void paintComponent(Graphics g){
@@ -154,9 +153,7 @@ public class GamePanel extends JPanel implements Runnable {
             // UI
             ui.draw(g2);
             g2.dispose();
-
         }
-       
     }
     public void playMusic(int i){
         music.setFile(i);
