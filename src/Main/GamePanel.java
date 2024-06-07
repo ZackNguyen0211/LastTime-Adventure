@@ -7,12 +7,14 @@ import Object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.EventHandler;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
     //Screen Settings
     final int originalTileSize = 16; //16x16 tile
     final int scale = 3;
+
     public final int tileSize = originalTileSize * scale; //48x48 tile
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
@@ -30,9 +32,12 @@ public class GamePanel extends JPanel implements Runnable {
     // system
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
-    Thread gameThread;
+    Sound music = new Sound();
+    Sound se = new Sound();
     public CollisionCheck cChecker = new CollisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+    Thread gameThread;
 
     //Entity and Object
     public Player player = new Player(this, keyH);
@@ -40,8 +45,6 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[] bat = new Entity[20];
     public Entity[] monster = new Entity[20];
     ArrayList<Entity> entityList = new ArrayList<>();
-
-    public UI ui = new UI(this);
 
     //Game State
     public int gameState;
@@ -56,7 +59,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
     }
 
     public void setupGame(){
@@ -93,6 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void update(){
         if(gameState == playState){
+            //player
             player.update();
             //bat
             for(int i = 0; i < bat.length; i++){
@@ -123,6 +126,7 @@ public class GamePanel extends JPanel implements Runnable {
             // tile
             tileM.draw(g2);
             // object
+            entityList.add(player);
             for(int i = 0; i< obj.length; i++){
                 if(obj[i] !=null){
                     obj[i].draw(g2, this);

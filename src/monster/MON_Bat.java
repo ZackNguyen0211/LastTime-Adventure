@@ -12,6 +12,7 @@ import Main.GamePanel;
 public class MON_Bat extends Entity {
     public MON_Bat(GamePanel gp) {
         super(gp);
+        type = 1;
         direction = "down";
         name = "Bat";
         speed = 3;
@@ -28,18 +29,14 @@ public class MON_Bat extends Entity {
         getBatImage();
     }
     public void getBatImage(){
-        try{
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/bat/bat_down_2.png")));
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
+            up1 = setup("/Picture/bat/bat_down_1.png", gp.tileSize, gp.tileSize);
+            up2 = setup("/Picture/bat/bat_down_2.png", gp.tileSize, gp.tileSize);
+            down1 = setup ("/Picture/bat/bat_down_1.png", gp.tileSize, gp.tileSize);;
+            down2 = setup("/Picture/bat/bat_down_2.png", gp.tileSize, gp.tileSize);
+            left1 = setup("/Picture/bat/bat_down_1.png", gp.tileSize, gp.tileSize);
+            left2 = setup("/Picture/bat/bat_down_2.png", gp.tileSize, gp.tileSize);
+            right1 = setup("/Picture/bat/bat_down_1.png", gp.tileSize, gp.tileSize);
+            right2 = setup("/Picture/bat/bat_down_2.png", gp.tileSize, gp.tileSize);
     }
     @Override
     public void setAction(){

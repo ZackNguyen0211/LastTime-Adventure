@@ -12,14 +12,6 @@ public class AssetSetter {
     }
     
     public void setObject(){
-
-        //  gp.obj[0] = new OBJ_Key();
-        //  gp.obj[0] .worldX = 4 * gp.tileSize;
-        //  gp.obj[0] .worldY = 19 * gp.tileSize;
-
-        //  gp.obj[0] = new OBJ_Door();
-        //  gp.obj[0] .worldX = 5 * gp.tileSize;
-        //  gp.obj[0] .worldY = 19 * gp.tileSize;
          
     }
     public void setBat(){
@@ -37,11 +29,11 @@ public class AssetSetter {
     }
     public void setMonster(){
         gp.monster[0] = new MON_GreenSlime(gp);
-        gp.monster[0].worldX = 8 * gp.tileSize;
+        gp.monster[0].worldX = 16 * gp.tileSize;
         gp.monster[0].worldY = 8 * gp.tileSize;
 
         gp.monster[1] = new MON_GreenSlime(gp);
-        gp.monster[1].worldX = 8 * gp.tileSize;
+        gp.monster[1].worldX = 26 * gp.tileSize;
         gp.monster[1].worldY = 9 * gp.tileSize;
     }
 }

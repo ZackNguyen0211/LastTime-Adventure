@@ -19,7 +19,16 @@ public class Player extends Entity{
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
+
         solidArea = new Rectangle(8, 16, 32, 32);
+
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         attackArea.width = 36;
         attackArea.height = 36;
 
@@ -38,32 +47,24 @@ public class Player extends Entity{
         life = maxLife;
     }
     public void getPlayerImage(){
-        try {
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/up_1")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/up_2")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/down_1")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/down_2")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/left_1")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/left_2")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/right_1")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/right_2")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        up1 = setup("/Picture/player/up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Picture/player/up_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/Picture/player/down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Picture/player/down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Picture/player/left_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Picture/player/left_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/Picture/player/right_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Picture/player/right_2", gp.tileSize, gp.tileSize);
     }
     public void getPlayerAttackImage() {
-        try {
-            attackUp1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackUp_1")));
-            attackUp2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackUp_2")));
-            attackDown1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackDown_1")));
-            attackDown2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackDown_2")));
-            attackLeft1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackLeft_1")));
-            attackLeft2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackLeft_2")));
-            attackRight1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackRight_1")));
-            attackRight2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/player/attackRight_2")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        attackUp1 = setup("/Picture/player/attackUp_1", gp.tileSize, gp.tileSize*2);
+        attackUp2 = setup("/Picture/player/attackUp_2", gp.tileSize, gp.tileSize*2);
+        attackDown1 = setup("/Picture/player/attackDown_1", gp.tileSize, gp.tileSize*2);
+        attackDown2 = setup("/Picture/player/attackDown_2", gp.tileSize, gp.tileSize*2);
+        attackLeft1 = setup("/Picture/player/attackLeft_1", gp.tileSize*2, gp.tileSize);
+        attackLeft2 = setup("/Picture/player/attackLeft_2", gp.tileSize*2, gp.tileSize);
+        attackRight1 = setup("/Picture/player/attackRight_1", gp.tileSize*2, gp.tileSize);
+        attackRight2 = setup("/Picture/player/attackRight_2", gp.tileSize*2, gp.tileSize);
     }
     public void update() {
         if(isAttacking) {
@@ -89,7 +90,7 @@ public class Player extends Entity{
             interactBat(batIndex);
             //check monster collision
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            interactMonster(monsterIndex);
+            interactGreenSlime(monsterIndex);
 
             // If collision is false, player can move
             if(!collisionOn && !keyH.enterPressed){
@@ -118,6 +119,14 @@ public class Player extends Entity{
             if(standCounter == 20) {
                 spriteNum = 1;
                 standCounter = 0;
+            }
+        }
+
+        if(invincible){
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
             }
         }
     }
@@ -177,20 +186,18 @@ public class Player extends Entity{
     }
     public void interactBat(int batIndex){
         if(batIndex != 999){
-            System.out.println("Player hit Bat");
-            // gp.monster[batIndex].life --;
-            // if(gp.monster[batIndex].life <= 0){
-            //     gp.monster[batIndex] = null;
-            // }
+            if(!invincible){
+                life -= 1;
+                invincible = true;
+            }
         }
     }
-    public void interactMonster(int monsterIndex){
-        if(monsterIndex != 999){
-            System.out.println("Player hit Monster");
-            // gp.monster[monsterIndex].life --;
-            // if(gp.monster[monsterIndex].life <= 0){
-            //     gp.monster[monsterIndex] = null;
-            // }
+    public void interactGreenSlime(int greenSlimeIndex){
+        if(greenSlimeIndex != 999){
+            if(!invincible){
+                life -= 1;
+                invincible = true;
+            }
         }
     }
     public void draw(Graphics2D g2){
