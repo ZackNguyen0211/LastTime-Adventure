@@ -249,6 +249,12 @@ public class Player extends Entity{
                 }
                 break;
         }
+        if(invincible){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
         g2.drawImage(image, tempScreenX, tempScreenY,null);
+
+        //Reset alpha
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }
