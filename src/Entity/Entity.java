@@ -20,7 +20,6 @@ public class Entity {
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public boolean collisionOn = false;
     boolean isAttacking = false;
-//ASDASHJGDJSAHGASK
     //Character status
     public int maxLife;
     public int life;
