@@ -2,18 +2,13 @@ package Main;
 
 import monster.MON_Bat;
 import monster.MON_GreenSlime;
-import Object.OBJ_Heart;
-
 public class AssetSetter {
     GamePanel gp;
 
     public AssetSetter(GamePanel gp){
         this.gp = gp ;
     }
-    
-    public void setObject(){
-         
-    }
+    public void setObject(){}
     public void setBat(){
         gp.bat[0] = new MON_Bat(gp);
         gp.bat[0].worldX = 31 * gp.tileSize;

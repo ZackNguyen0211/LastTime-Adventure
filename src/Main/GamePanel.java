@@ -8,7 +8,6 @@ import Object.SuperObject;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.beans.EventHandler;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -31,7 +30,6 @@ public class GamePanel extends JPanel implements Runnable {
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen;
     Graphics2D g2;
-    public boolean fullScreenOn = false;
 
     //FPS
     int FPS = 60;
