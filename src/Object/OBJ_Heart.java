@@ -1,8 +1,8 @@
 package Object;
+
 import java.io. IOException;
 import javax.imageio.ImageIO;
 import Main.GamePanel ;
-import Main.UtilityTool; 
 
 
 public class OBJ_Heart extends SuperObject  {
@@ -20,8 +20,8 @@ public class OBJ_Heart extends SuperObject  {
             image =  uTool.scaleImage(image, gp.tileSize, gp.tileSize);
             image2 = uTool.scaleImage(image2, gp.tileSize, gp.tileSize);
             image3 = uTool.scaleImage(image3, gp.tileSize, gp.tileSize);
-        }catch(IOException e){
-            e.printStackTrace();
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

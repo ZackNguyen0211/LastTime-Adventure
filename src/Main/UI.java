@@ -6,18 +6,12 @@ import java.awt.image.BufferedImage;
 import Object.OBJ_Heart;
 import Object.SuperObject;
 
-
 public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font arial_40, arial_80B, maruMonica, purisaB;
     BufferedImage heart_full, heart_half, heart_blank;
-   
-    public boolean messageOn = false;
-    public String message ="";
-    int messageCounter = 0;
-    public boolean gameFinished = false;
-    public String currentDialogue = "";
+
     public int commandNum = 0;
     int subState = 0;
 
