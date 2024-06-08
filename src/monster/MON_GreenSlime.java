@@ -1,10 +1,6 @@
 package monster;
 
-import java.io.IOException;
-import java.util.Objects;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
 
 import Entity.Entity;
 import Main.GamePanel;
@@ -12,6 +8,7 @@ import Main.GamePanel;
 public class MON_GreenSlime extends Entity {
     public MON_GreenSlime(GamePanel gp) {
         super(gp);
+        type = 1;
         name = "Green Slime";
         direction = "down";
         speed = 1;
@@ -25,22 +22,18 @@ public class MON_GreenSlime extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        getMonsterImage();
+        getGreenSlimeImage();
     }
 
-    public void getMonsterImage(){
-        try{
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Picture/monster/greenslime_down_2.png")));
-        } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
+    public void getGreenSlimeImage(){
+        up1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup ("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);;
+        down2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
     }
     @Override
     public void setAction(){
@@ -57,7 +50,7 @@ public class MON_GreenSlime extends Entity {
             if (i > 50 && i <= 75) {
                 direction = "left";
             }
-            if (i > 75 && i <= 100) {
+            if (i > 75) {
                 direction = "right";
             }
             actionLockCounter = 0;

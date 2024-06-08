@@ -1,5 +1,7 @@
 package Main;
 import javax.swing.JFrame;
+import java.lang.reflect.Field;
+
 public class Main {
     public static void main(String[] args){
         JFrame window = new JFrame();
@@ -17,5 +19,6 @@ public class Main {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+
     }
 }

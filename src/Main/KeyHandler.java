@@ -45,7 +45,7 @@ public class KeyHandler implements KeyListener {
             }  
         }
         //play state
-        if(code == KeyEvent.VK_W){
+        else if(code == KeyEvent.VK_W){
             upPressed = true;
         }
         if(code == KeyEvent.VK_S){
@@ -61,25 +61,12 @@ public class KeyHandler implements KeyListener {
             if(gp.gameState == gp.playState){
                 gp.gameState = gp.pauseState;
             }
-                else if(code == KeyEvent.VK_P){
-                    if( gp.gameState == gp.pauseState){
-                        gp.gameState =gp.playState;
-                        
-                    }
+            else {
+                if( gp.gameState == gp.pauseState){
+                    gp.gameState =gp.playState;
                 }
             }
-
-    //     if(code == KeyEvent.VK_P){
-    //         gp.gameState = gp.pauseState;
-    //     }
-    //      //Pause State
-    //     else if(gp.gameState == gp.pauseState){
-    //         if( code == KeyEvent.VK_P){
-    //             gp.gameState =gp.playState;
-            
-    //     }
-    // }
-
+        }
         if(code == KeyEvent.VK_ENTER){
             enterPressed = true;           
         }
