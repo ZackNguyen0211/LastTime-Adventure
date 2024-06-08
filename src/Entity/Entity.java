@@ -129,7 +129,7 @@ public class Entity {
                     break;
             }
             //Start Alpha Monster
-            if(invincible){
+            if(invincible == true){
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
             }
             if(dying == true){

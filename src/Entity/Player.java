@@ -192,7 +192,7 @@ public class Player extends Entity{
                 gp.bat[i].life -= 1;
                 gp.bat[i].invincible = true;
                 if(gp.bat[i].life <= 0){
-                    gp.bat[i] = null;
+                    gp.bat[i].dying = true;
                 }
             }
         }
