@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10];
     public Entity[] bat = new Entity[20];
-    public Entity[] monster = new Entity[20];
+    public Entity[] slime = new Entity[20];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     //Game State
@@ -102,10 +102,15 @@ public class GamePanel extends JPanel implements Runnable {
                     bat[i].update();
                 }
             }
-            //monster
-            for(int i = 0; i< monster.length; i++){
-                if(monster[i] != null){
-                    monster[i].update();
+            //slime
+            for(int i = 0; i< slime.length; i++){
+                if(slime[i] != null){
+                    if(slime[i].alive == true && slime[i].dying== false) {
+                        slime[i].update();
+                    }
+                    if(slime[i].alive == false) {
+                        slime[i] = null;
+                    }
                 }
             }
         }
@@ -137,9 +142,9 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
             //monster
-            for(int i = 0; i< monster.length; i++){
-                if(monster[i] !=null){
-                    monster[i].draw(g2);
+            for(int i = 0; i< slime.length; i++){
+                if(slime[i] !=null){
+                    slime[i].draw(g2);
                 }
             }
             // player

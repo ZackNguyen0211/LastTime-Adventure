@@ -29,8 +29,8 @@ public class Player extends Entity{
         solidArea.width = 32;
         solidArea.height = 32;
 
-        attackArea.width = 36;
-        attackArea.height = 36;
+        attackArea.width = 40;
+        attackArea.height = 40;
 
         setDefaultValues();
         getPlayerImage();
@@ -85,12 +85,11 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            //check bat collision
+            //Check monster collision
             int batIndex = gp.cChecker.checkEntity(this, gp.bat);
             interactBat(batIndex);
-            //check monster collision
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            interactGreenSlime(monsterIndex);
+            int slimeIndex = gp.cChecker.checkEntity(this, gp.slime);
+            interactGreenSlime(slimeIndex);
 
             // If collision is false, player can move
             if(!collisionOn && !keyH.enterPressed){
@@ -151,13 +150,16 @@ public class Player extends Entity{
                 case "left" : worldX -= attackArea.width; break;
                 case "right" : worldX += attackArea.width; break;
             }
+
             //attackArea becomes solidArea
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
             //Check monster collision with the updated worldX, worldY and solidArea
-            //int monsterIndex  = gp.cChecker.checkEntity(this, gp.monster);
-            //damageMonster(monsterIndex);
+            int slimeIndex  = gp.cChecker.checkEntity(this, gp.slime);
+            damageGreenSlime(slimeIndex);
+            int batIndex  = gp.cChecker.checkEntity(this, gp.bat);
+            damageBat(batIndex);
 
             //After checking collision, resort the original data
             worldX = currentWorldX;
@@ -171,12 +173,28 @@ public class Player extends Entity{
             isAttacking = false;
         }
     }
-    public void damageMonster(int i){
+    public void damageGreenSlime(int i){
         if (i != 999) {
-            System.out.println("Hit");
+            if(gp.slime[i].invincible == false){
+                gp.playSE(1);
+                gp.slime[i].life -= 1;
+                gp.slime[i].invincible = true;
+                if(gp.slime[i].life <= 0){
+                    gp.slime[i].dying = true;
+                }
+            }
         }
-        else {
-            System.out.println("Miss");
+    }
+    public void damageBat(int i){
+        if (i != 999) {
+            if(gp.bat[i].invincible == false){
+                gp.playSE(1);
+                gp.bat[i].life -= 1;
+                gp.bat[i].invincible = true;
+                if(gp.bat[i].life <= 0){
+                    gp.bat[i] = null;
+                }
+            }
         }
     }
     private void checkIfAttacking() {
@@ -187,6 +205,7 @@ public class Player extends Entity{
     public void interactBat(int batIndex){
         if(batIndex != 999){
             if(!invincible){
+                gp.playSE(2);
                 life -= 1;
                 invincible = true;
             }
@@ -195,6 +214,7 @@ public class Player extends Entity{
     public void interactGreenSlime(int greenSlimeIndex){
         if(greenSlimeIndex != 999){
             if(!invincible){
+                gp.playSE(2);
                 life -= 1;
                 invincible = true;
             }
@@ -249,12 +269,13 @@ public class Player extends Entity{
                 }
                 break;
         }
+        //Start Alpha Player
         if(invincible){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
         g2.drawImage(image, tempScreenX, tempScreenY,null);
 
-        //Reset alpha
+        //Reset alpha Player
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }
