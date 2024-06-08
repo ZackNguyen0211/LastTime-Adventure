@@ -32,10 +32,6 @@ public class UI {
         heart_half = heart.image2;
         heart_blank = heart.image3;
     }
-    public void showMessage(String text){
-        message = text ;
-        messageOn = true;
-    }
     public void draw(Graphics2D g2){
         this.g2 = g2;
 
@@ -158,6 +154,7 @@ public class UI {
             case 1:  break;
             case 2:  break;
         }
+        gp.keyH.enterPressed = false;
     }
     public void options_top(int frameX, int frameY){
         int textX;
@@ -169,43 +166,60 @@ public class UI {
         textY = frameY + gp.tileSize;
         g2.drawString(text,textX,textY);
 
-        //Full Screen On/Off
+        //Music
         textX = frameX + gp.tileSize;
         textY += gp.tileSize*2;
-        g2.drawString("Full Screen",textX,textY);
+        //textY += gp.tileSize;
+        g2.drawString("Music", textX, textY);
         if(commandNum == 0){
             g2.drawString(">",textX - 25,textY);
         }
-        //Music
-        textY += gp.tileSize;
-        g2.drawString("Music", textX, textY);
-        if(commandNum == 1){
-            g2.drawString(">",textX - 25,textY);
-        }
+
         //SE
         textY += gp.tileSize;
         g2.drawString("SE", textX, textY);
-        if(commandNum == 2){
+        if(commandNum == 1){
             g2.drawString(">",textX - 25,textY);
         }
-        //Control
-        textY += gp.tileSize;
-        g2.drawString("Control", textX, textY);
-        if(commandNum == 3){
-            g2.drawString(">",textX - 25,textY);
-        }
+
         //End Game
         textY += gp.tileSize;
         g2.drawString("End Game", textX, textY);
-        if(commandNum == 4){
+        if(commandNum == 2){
             g2.drawString(">",textX - 25,textY);
+            if(gp.keyH.enterPressed == true){
+                gp.playSE(7);
+                subState = 0;
+                gp.gameState = gp.titleState;
+                gp.stopMusic();
+                gp.playMusic(0);
+            }
         }
+
         //Resume
         textY += gp.tileSize*2;
         g2.drawString("Resume Game", textX, textY);
-        if(commandNum == 5){
+        if(commandNum == 3){
             g2.drawString(">",textX - 25,textY);
+            if(gp.keyH.enterPressed == true){
+                gp.gameState = gp.playState;
+                commandNum = 0;
+            }
         }
+
+        //Music Volume
+        textX = frameX + (int)(gp.tileSize*4.5);
+        textY = frameY + gp.tileSize*2 + 24;
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRect(textX,textY,120,24);
+        int volumeWidth = 24 * gp.music.volumeScale;
+        g2.fillRect(textX,textY,volumeWidth,24);
+
+        //SE Volume
+        textY += gp.tileSize;
+        g2.drawRect(textX,textY,120,24);
+        volumeWidth = 24 * gp.se.volumeScale;
+        g2.fillRect(textX,textY,volumeWidth,24);
     }
     public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0, 0, 0, 210);
