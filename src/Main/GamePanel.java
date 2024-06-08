@@ -7,6 +7,7 @@ import Object.SuperObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.beans.EventHandler;
 import java.util.ArrayList;
 
@@ -16,15 +17,23 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; //48x48 tile
-    public final int maxScreenCol = 16;
+    public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; //768 pixels
+    public final int screenWidth = tileSize * maxScreenCol; //960 pixels
     public final int screenHeight = tileSize * maxScreenRow; //576 pixels
 
     //World settings 50x30
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 30;
 
+    //FulScreen
+    int screenWidth2 = screenWidth;
+    int screenHeight2 = screenHeight;
+    BufferedImage tempScreen;
+    Graphics2D g2;
+    public boolean fullScreenOn = false;
+
+    //FPS
     int FPS = 60;
 
     // system
@@ -35,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionCheck cChecker = new CollisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
+    Config config = new Config(this);
     Thread gameThread;
 
     //Entity and Object
@@ -50,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int optionsState = 3;
+    public final int gameOverState = 4;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -62,11 +73,37 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
         playMusic(0);
         aSetter.setObject();
-        aSetter.setMonster();
+        aSetter.setSlime();
         aSetter.setBat();
         gameState = titleState;
-    }
 
+        tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
+        g2 = (Graphics2D) tempScreen.getGraphics();
+        setFullScreen();
+    }
+    public void retry(){
+        player.setDefaultPosition();
+        player.restoreLife();
+        aSetter.setBat();
+        aSetter.setSlime();
+    }
+    public void restart(){
+        player.setDefaultValues();
+        player.setDefaultPosition();
+        player.restoreLife();
+        aSetter.setBat();
+        aSetter.setSlime();
+    }
+    public void setFullScreen(){
+        //Set local screen device
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(Main.window);
+
+        //Get FullScreen width and height
+        screenWidth2 = Main.window.getWidth();
+        screenHeight2 = Main.window.getHeight();
+    }
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
@@ -87,7 +124,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             if(delta >= 1){
                 update();
-                repaint();
+                drawToTempScreen(); //G2 draw image to the tempScreen
+                drawToScreen(); // draw image from the tempScreen to the screen
                 delta--;
             }
         }
@@ -99,11 +137,16 @@ public class GamePanel extends JPanel implements Runnable {
             //bat
             for(int i = 0; i < bat.length; i++){
                 if(bat[i] != null){
-                    bat[i].update();
+                    if(bat[i].alive == true && bat[i].dying== false) {
+                        bat[i].update();
+                    }
+                    if(bat[i].alive == false) {
+                        bat[i] = null;
+                    }
                 }
             }
             //slime
-            for(int i = 0; i< slime.length; i++){
+            for(int i = 0; i < slime.length; i++){
                 if(slime[i] != null){
                     if(slime[i].alive == true && slime[i].dying== false) {
                         slime[i].update();
@@ -117,60 +160,61 @@ public class GamePanel extends JPanel implements Runnable {
         if(gameState == pauseState){
         }
     }
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+    public void drawToTempScreen() {
         // title screen
-        if(gameState == titleState){
+        if (gameState == titleState) {
             ui.draw(g2);
         }
         // others
-        else{
+        else {
             // tile
             tileM.draw(g2);
             // object
             entityList.add(player);
-            for(int i = 0; i< obj.length; i++){
-                if(obj[i] !=null){
+            for (int i = 0; i < obj.length; i++) {
+                if (obj[i] != null) {
                     obj[i].draw(g2, this);
                 }
             }
             //bat
-            for(int i = 0; i< bat.length; i++){
-                if(bat[i] !=null){
+            for (int i = 0; i < bat.length; i++) {
+                if (bat[i] != null) {
                     bat[i].draw(g2);
                 }
             }
             //monster
-            for(int i = 0; i< slime.length; i++){
-                if(slime[i] !=null){
+            for (int i = 0; i < slime.length; i++) {
+                if (slime[i] != null) {
                     slime[i].draw(g2);
                 }
             }
             // player
             player.draw(g2);
             //Draw Entity List
-            for(int i = 0; i < entityList.size(); i++){
+            for (int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).draw(g2);
             }
             //Empty entity list
             entityList.clear();
             // UI
             ui.draw(g2);
-            g2.dispose();
         }
     }
-    public void playMusic(int i){
+    public void drawToScreen() {
+        Graphics g = getGraphics();
+        g.drawImage(tempScreen,0,0,screenWidth2,screenHeight2,null);
+        g.dispose();
+    }
+    public void playMusic ( int i){
         music.setFile(i);
         music.play();
         music.loop();
     }
-    public void stopMusic(){
+    public void stopMusic() {
         music.stop();
     }
-    public void playSE(int i){
+    public void playSE ( int i){
         se.setFile(i);
         se.play();
     }
-
 }

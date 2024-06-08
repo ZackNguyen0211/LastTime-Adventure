@@ -56,4 +56,9 @@ public class MON_GreenSlime extends Entity {
             actionLockCounter = 0;
         }
     }
+    @Override
+    public void dameReact(){
+        actionLockCounter = 0;
+        direction = gp.player.direction;
+    }
 }

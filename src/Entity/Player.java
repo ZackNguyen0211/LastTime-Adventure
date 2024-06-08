@@ -46,6 +46,15 @@ public class Player extends Entity{
         maxLife = 6;
         life = maxLife;
     }
+    public void setDefaultPosition(){
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 9;
+        direction = "down";
+    }
+    public void restoreLife(){
+        life = maxLife;
+        invincible = false;
+    }
     public void getPlayerImage(){
         up1 = setup("/Picture/player/up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/Picture/player/up_2", gp.tileSize, gp.tileSize);
@@ -112,21 +121,24 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
-        }
-        else {
+        } else {
             standCounter++;
             if(standCounter == 20) {
                 spriteNum = 1;
                 standCounter = 0;
             }
         }
-
         if(invincible){
             invincibleCounter++;
             if(invincibleCounter > 60){
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(life <= 0){
+            gp.stopMusic();
+            gp.playSE(4);
+            gp.gameState = gp.gameOverState;
         }
     }
     public void attacking() {
@@ -176,9 +188,10 @@ public class Player extends Entity{
     public void damageGreenSlime(int i){
         if (i != 999) {
             if(gp.slime[i].invincible == false){
-                gp.playSE(1);
+                gp.playSE(2);
                 gp.slime[i].life -= 1;
                 gp.slime[i].invincible = true;
+                gp.slime[i].dameReact();
                 if(gp.slime[i].life <= 0){
                     gp.slime[i].dying = true;
                 }
@@ -188,24 +201,26 @@ public class Player extends Entity{
     public void damageBat(int i){
         if (i != 999) {
             if(gp.bat[i].invincible == false){
-                gp.playSE(1);
+                gp.playSE(9);
                 gp.bat[i].life -= 1;
                 gp.bat[i].invincible = true;
+                gp.bat[i].dameReact();
                 if(gp.bat[i].life <= 0){
-                    gp.bat[i] = null;
+                    gp.bat[i].dying = true;
                 }
             }
         }
     }
     private void checkIfAttacking() {
         if (gp.keyH.enterPressed) {
+            gp.playSE(5);
             isAttacking = true;
         }
     }
     public void interactBat(int batIndex){
         if(batIndex != 999){
             if(!invincible){
-                gp.playSE(2);
+                gp.playSE(1);
                 life -= 1;
                 invincible = true;
             }
@@ -214,7 +229,7 @@ public class Player extends Entity{
     public void interactGreenSlime(int greenSlimeIndex){
         if(greenSlimeIndex != 999){
             if(!invincible){
-                gp.playSE(2);
+                gp.playSE(1);
                 life -= 1;
                 invincible = true;
             }
@@ -271,11 +286,11 @@ public class Player extends Entity{
         }
         //Start Alpha Player
         if(invincible){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            changeAlpha(g2,0.4f);
         }
         g2.drawImage(image, tempScreenX, tempScreenY,null);
 
         //Reset alpha Player
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        changeAlpha(g2,1f);
     }
 }
