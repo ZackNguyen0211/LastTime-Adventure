@@ -99,11 +99,16 @@ public class GamePanel extends JPanel implements Runnable {
             //bat
             for(int i = 0; i < bat.length; i++){
                 if(bat[i] != null){
-                    bat[i].update();
+                    if(bat[i].alive == true && bat[i].dying== false) {
+                        bat[i].update();
+                    }
+                    if(bat[i].alive == false) {
+                        bat[i] = null;
+                    }
                 }
             }
             //slime
-            for(int i = 0; i< slime.length; i++){
+            for(int i = 0; i < slime.length; i++){
                 if(slime[i] != null){
                     if(slime[i].alive == true && slime[i].dying== false) {
                         slime[i].update();

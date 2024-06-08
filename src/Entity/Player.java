@@ -199,6 +199,7 @@ public class Player extends Entity{
     }
     private void checkIfAttacking() {
         if (gp.keyH.enterPressed) {
+            gp.playSE(5);
             isAttacking = true;
         }
     }
