@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionCheck cChecker = new CollisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject obj[] = new SuperObject[20];
     public UI ui = new UI(this);
 
     //Game State
