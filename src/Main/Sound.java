@@ -10,12 +10,16 @@ public class Sound {
     URL[] soundURL = new URL[30];
 
     public Sound(){
-        soundURL[0] = getClass().getResource("/Sound/LastTime.wav");
-        soundURL[1] = getClass().getResource("/Sound/HitMonster.wav");
-        soundURL[2] = getClass().getResource("/Sound/ReceiveDamage.wav");
+        soundURL[0] = getClass().getResource("/Sound/LastTimeTitle.wav");
+        soundURL[1] = getClass().getResource("/Sound/receiveDamage.wav");
+        soundURL[2] = getClass().getResource("/Sound/HitSlime.wav");
         soundURL[3] = getClass().getResource("/Sound/FinalBattle.wav");
         soundURL[4] = getClass().getResource("/Sound/GameOver.wav");
         soundURL[5] = getClass().getResource("/Sound/SwingWeapon.wav");
+        soundURL[6] = getClass().getResource("/Sound/cursor.wav");
+        soundURL[7] = getClass().getResource("/Sound/Select.wav");
+        soundURL[8] = getClass().getResource("/Sound/LastTimeBackGround.wav");
+        soundURL[9] = getClass().getResource("/Sound/HitBat.wav");
     }
 
     public void setFile(int i){

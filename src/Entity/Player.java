@@ -176,7 +176,7 @@ public class Player extends Entity{
     public void damageGreenSlime(int i){
         if (i != 999) {
             if(gp.slime[i].invincible == false){
-                gp.playSE(1);
+                gp.playSE(2);
                 gp.slime[i].life -= 1;
                 gp.slime[i].invincible = true;
                 gp.slime[i].dameReact();
@@ -189,7 +189,7 @@ public class Player extends Entity{
     public void damageBat(int i){
         if (i != 999) {
             if(gp.bat[i].invincible == false){
-                gp.playSE(1);
+                gp.playSE(9);
                 gp.bat[i].life -= 1;
                 gp.bat[i].invincible = true;
                 gp.bat[i].dameReact();
@@ -208,7 +208,7 @@ public class Player extends Entity{
     public void interactBat(int batIndex){
         if(batIndex != 999){
             if(!invincible){
-                gp.playSE(2);
+                gp.playSE(1);
                 life -= 1;
                 invincible = true;
             }
@@ -217,7 +217,7 @@ public class Player extends Entity{
     public void interactGreenSlime(int greenSlimeIndex){
         if(greenSlimeIndex != 999){
             if(!invincible){
-                gp.playSE(2);
+                gp.playSE(1);
                 life -= 1;
                 invincible = true;
             }
@@ -274,11 +274,11 @@ public class Player extends Entity{
         }
         //Start Alpha Player
         if(invincible){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            changeAlpha(g2,0.4f);
         }
         g2.drawImage(image, tempScreenX, tempScreenY,null);
 
         //Reset alpha Player
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        changeAlpha(g2,1f);
     }
 }

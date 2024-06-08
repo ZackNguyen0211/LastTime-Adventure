@@ -21,25 +21,27 @@ public class KeyHandler implements KeyListener {
         if(gp.gameState == gp.titleState){
             if ((code == KeyEvent.VK_W)) {
                 gp.ui.commandNum--;
+                gp.playSE(6);
                 if(gp.ui.commandNum<0){
                     gp.ui.commandNum = 2;
                 }
             }
             if ((code == KeyEvent.VK_S)) {
                 gp.ui.commandNum++;
+                gp.playSE(6);
                 if(gp.ui.commandNum>2){
                     gp.ui.commandNum = 0;
                 }
             }
             if(code == KeyEvent.VK_ENTER){
                 if(gp.ui.commandNum == 0){
+                    gp.playSE(7);
                     gp.gameState = gp.playState;
-                    // gp.playMusic(0);
+                    gp.stopMusic();
+                    gp.playMusic(8);
                 }
                 if (gp.ui.commandNum == 1) {
-                    //add when do save and load
-                }
-                if (gp.ui.commandNum == 2) {
+                    gp.playSE(7);
                     System.exit(0);
                 }
             }  
@@ -70,7 +72,18 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_ENTER){
             enterPressed = true;           
         }
-}
+        //Option State
+        else if(code == KeyEvent.VK_ESCAPE){
+            if(gp.gameState == gp.playState){
+                gp.gameState = gp.optionsState;
+            }
+            else {
+                if( gp.gameState == gp.optionsState){
+                    gp.gameState =gp.playState;
+                }
+            }
+        }
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {
