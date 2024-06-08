@@ -27,10 +27,9 @@ public class Config {
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/config.txt"));
-            String s = br.readLine();
 
             //Music
-            s = br.readLine();
+            String s = br.readLine();
             gp.music.volumeScale = Integer.parseInt(s);
 
             //SE
