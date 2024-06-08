@@ -27,7 +27,7 @@ public class AssetSetter {
         gp.bat[2].worldX = 31 * gp.tileSize;
         gp.bat[2].worldY = 23 * gp.tileSize;
     }
-    public void setMonster(){
+    public void setSlime(){
         gp.slime[0] = new MON_GreenSlime(gp);
         gp.slime[0].worldX = 14 * gp.tileSize;
         gp.slime[0].worldY = 9 * gp.tileSize;

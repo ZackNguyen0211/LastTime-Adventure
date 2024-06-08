@@ -46,6 +46,15 @@ public class Player extends Entity{
         maxLife = 6;
         life = maxLife;
     }
+    public void setDefaultPosition(){
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 9;
+        direction = "down";
+    }
+    public void restoreLife(){
+        life = maxLife;
+        invincible = false;
+    }
     public void getPlayerImage(){
         up1 = setup("/Picture/player/up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/Picture/player/up_2", gp.tileSize, gp.tileSize);
@@ -112,21 +121,24 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
-        }
-        else {
+        } else {
             standCounter++;
             if(standCounter == 20) {
                 spriteNum = 1;
                 standCounter = 0;
             }
         }
-
         if(invincible){
             invincibleCounter++;
             if(invincibleCounter > 60){
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(life <= 0){
+            gp.stopMusic();
+            gp.playSE(4);
+            gp.gameState = gp.gameOverState;
         }
     }
     public void attacking() {

@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int optionsState = 3;
+    public final int gameOverState = 4;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -72,13 +73,26 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
         playMusic(0);
         aSetter.setObject();
-        aSetter.setMonster();
+        aSetter.setSlime();
         aSetter.setBat();
         gameState = titleState;
 
         tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D) tempScreen.getGraphics();
         setFullScreen();
+    }
+    public void retry(){
+        player.setDefaultPosition();
+        player.restoreLife();
+        aSetter.setBat();
+        aSetter.setSlime();
+    }
+    public void restart(){
+        player.setDefaultValues();
+        player.setDefaultPosition();
+        player.restoreLife();
+        aSetter.setBat();
+        aSetter.setSlime();
     }
     public void setFullScreen(){
         //Set local screen device
