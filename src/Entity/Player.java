@@ -179,6 +179,7 @@ public class Player extends Entity{
                 gp.playSE(1);
                 gp.slime[i].life -= 1;
                 gp.slime[i].invincible = true;
+                gp.slime[i].dameReact();
                 if(gp.slime[i].life <= 0){
                     gp.slime[i].dying = true;
                 }
@@ -191,6 +192,7 @@ public class Player extends Entity{
                 gp.playSE(1);
                 gp.bat[i].life -= 1;
                 gp.bat[i].invincible = true;
+                gp.bat[i].dameReact();
                 if(gp.bat[i].life <= 0){
                     gp.bat[i].dying = true;
                 }
