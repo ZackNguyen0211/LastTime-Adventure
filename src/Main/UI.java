@@ -223,6 +223,7 @@ public class UI {
                 gp.gameState = gp.titleState;
                 gp.stopMusic();
                 gp.playMusic(0);
+                gp.restart();
             }
         }
 
