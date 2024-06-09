@@ -5,6 +5,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.net.URL;
+
 public class Sound {
 
     Clip clip;
@@ -24,6 +25,7 @@ public class Sound {
         soundURL[7] = getClass().getResource("/Sound/Select.wav");
         soundURL[8] = getClass().getResource("/Sound/LastTimeBackGround.wav");
         soundURL[9] = getClass().getResource("/Sound/HitBat.wav");
+        soundURL[10] = getClass().getResource("/Sound/WinGame.wav");
     }
 
     public void setFile(int i){

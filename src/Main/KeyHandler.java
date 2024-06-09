@@ -21,11 +21,13 @@ public class KeyHandler implements KeyListener {
         //play state
         else if(gp.gameState == gp.playState){playState(code);}
         //Pause State
-        else if(gp.gameState == gp.pauseState){pauseState(code);gp.playSE(6);}
+        else if(gp.gameState == gp.pauseState){pauseState(code);}
         //Option State
-        else if(gp.gameState == gp.optionsState) {optionState(code);gp.playSE(6);}
-        //Option State
+        else if(gp.gameState == gp.optionsState) {optionState(code);}
+        //Game Over State
         else if(gp.gameState == gp.gameOverState) {gameOverState(code);}
+        //Win State
+        else if(gp.gameState == gp.winState) {winState(code);}
     }
 
     public void titleState(int code){
@@ -157,6 +159,17 @@ public class KeyHandler implements KeyListener {
                 gp.playMusic(8);
             } else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
+                gp.playSE(7);
+                gp.playMusic(0);
+                gp.restart();
+            }
+        }
+    }
+    public void winState(int code){
+        if(code == KeyEvent.VK_ENTER){
+            if (gp.ui.commandNum == 0) {
+                gp.gameState = gp.titleState;
+                gp.stopMusic();
                 gp.playSE(7);
                 gp.playMusic(0);
                 gp.restart();

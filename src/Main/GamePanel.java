@@ -5,6 +5,7 @@ import Entity.Player;
 import Tiles.TileManager;
 import Object.SuperObject;
 import PathFinder.PathFinding;
+import monster.MON_Bat;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int optionsState = 3;
     public final int gameOverState = 4;
+    public final int winState = 5;
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -157,8 +159,31 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
             }
+            checkWinCondition();
         }
-        if(gameState == pauseState){
+    }
+    public void checkWinCondition(){
+        boolean allBatsDead = true;
+        boolean allSlimesDead = true;
+        // Check all bats
+        for (Entity b : bat) {
+            if (b != null && !b.dying) {
+                allBatsDead = false;
+                break;
+            }
+        }
+        // Check all slimes
+        for (Entity s : slime) {
+            if (s != null && !s.dying) {
+                allSlimesDead = false;
+                break;
+            }
+        }
+        // If all bats and slimes are dead, change the game state to win state
+        if (allBatsDead && allSlimesDead) {
+            gameState = winState;
+            stopMusic();
+            playSE(10);
         }
     }
     public void drawToTempScreen() {

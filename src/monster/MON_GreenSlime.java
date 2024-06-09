@@ -24,7 +24,6 @@ public class MON_GreenSlime extends Entity {
 
         getGreenSlimeImage();
     }
-
     public void getGreenSlimeImage(){
         up1 = setup("/Picture/green_slime/green_slime_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("/Picture/green_slime/green_slime_down_2", gp.tileSize, gp.tileSize);
