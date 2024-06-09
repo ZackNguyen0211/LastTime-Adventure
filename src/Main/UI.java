@@ -19,6 +19,7 @@ public class UI {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
+        
 
         // Create hub object
         SuperObject heart = new OBJ_Heart(gp);
@@ -46,7 +47,7 @@ public class UI {
     }
     public void drawPlayerLife(){
 
-        // gp.player.life = 5; use to check
+        // gp.player.life = 3; //use to check
 
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;

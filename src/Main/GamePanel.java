@@ -4,6 +4,7 @@ import Entity.Entity;
 import Entity.Player;
 import Tiles.TileManager;
 import Object.SuperObject;
+import PathFinder.PathFinding;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     // system
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
@@ -43,6 +44,8 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     Config config = new Config(this);
+    public PathFinding pFinder = new PathFinding(this);
+
     Thread gameThread;
 
     //Entity and Object
