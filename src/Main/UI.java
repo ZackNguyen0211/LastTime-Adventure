@@ -249,6 +249,7 @@ public class UI {
 
         gp.config.saveConfig();
     }
+    // make game full screen
     public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0, 0, 0, 210);
         g2.setColor(c);
