@@ -28,6 +28,7 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
+    public boolean onPath = false;
 
     //Counter
     public int spriteCounter = 0;
@@ -47,13 +48,11 @@ public class Entity {
     }
     public void setAction(){}
     public void dameReact(){}
-    public void update(){
-        collisionOn = false;
-        setAction();
-
+    public void checkCollision(){
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkEntity(this, gp.slime);
+        gp.cChecker.checkEntity(this, gp.bat);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
         if(this.type == 2 && contactPlayer){
@@ -64,6 +63,11 @@ public class Entity {
                 gp.player.invincible = true;
             }
         }
+    }
+    public void update(){
+        
+        setAction();
+        checkCollision();
 
         // If collision is false, player can move
         if(!collisionOn){
@@ -188,19 +192,68 @@ public class Entity {
             image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
             image = uTool.scaleImage(image, width, height);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
         return image;
     }
-    public void checkAndChangeSpriteAnimationImage() {
-        spriteCounter++;
-        if(spriteCounter > 12){
-            if(spriteNum == 1){
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 1;
+
+    
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x) / gp.tileSize;
+        int startRow = (worldY + solidArea.y) / gp.tileSize;
+        gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
+        if (gp.pFinder.search() == true) {
+            int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
+            int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
+
+            //Entity solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX +gp.tileSize){
+                direction = "up";
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX +gp.tileSize) {
+                direction = "down";
+            } else if (enTopY >= nextY && enBottomY < nextY  + gp.tileSize) {
+                //Left or right
+                if (enLeftX > nextX){
+                    direction = "left";
+                }
+                if(enLeftX < nextX){
+                    direction = "right";
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                //up or left
+                direction = "up";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "left";
+                }
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                //up or right
+                direction = "up";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "right";
+                }
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                //down or left
+                direction = "down";
+                checkCollision();
+                if (collisionOn == true) {
+                    direction = "left";
+                }
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                //down or right
+                direction = "down";
+                checkCollision();
+                if(collisionOn == true){
+                    direction = "right";
+                }
             }
-            spriteCounter = 0;
         }
     }
+
 }
