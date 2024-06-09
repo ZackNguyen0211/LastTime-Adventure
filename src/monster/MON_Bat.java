@@ -27,7 +27,7 @@ public class MON_Bat extends Entity {
     public void getBatImage(){
             up1 = setup("/Picture/bat/bat_down_1", gp.tileSize, gp.tileSize);
             up2 = setup("/Picture/bat/bat_down_2", gp.tileSize, gp.tileSize);
-            down1 = setup ("/Picture/bat/bat_down_1", gp.tileSize, gp.tileSize);;
+            down1 = setup ("/Picture/bat/bat_down_1", gp.tileSize, gp.tileSize);
             down2 = setup("/Picture/bat/bat_down_2", gp.tileSize, gp.tileSize);
             left1 = setup("/Picture/bat/bat_down_1", gp.tileSize, gp.tileSize);
             left2 = setup("/Picture/bat/bat_down_2", gp.tileSize, gp.tileSize);
