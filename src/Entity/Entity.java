@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Entity {
-
     public GamePanel gp;
     public int speed;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
@@ -65,7 +64,6 @@ public class Entity {
         }
     }
     public void update(){
-        
         setAction();
         checkCollision();
 
@@ -184,7 +182,6 @@ public class Entity {
     public void changeAlpha(Graphics2D g2, float alphaValue){
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
-
     public BufferedImage setup (String imagePath, int width, int height){
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
@@ -194,11 +191,8 @@ public class Entity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         return image;
     }
-
-    
     public void searchPath(int goalCol, int goalRow) {
         int startCol = (worldX + solidArea.x) / gp.tileSize;
         int startRow = (worldY + solidArea.y) / gp.tileSize;
