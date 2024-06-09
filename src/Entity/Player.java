@@ -36,11 +36,11 @@ public class Player extends Entity{
     public void setDefaultValues(){
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 9;
-        speed = 8;
+        speed = 5;
         direction = "down";
 
         //Player status
-        maxLife = 99;
+        maxLife = 12;
         life = maxLife;
     }
     public void setDefaultPosition(){
